@@ -2,6 +2,6 @@
 
 export default function Toy() {
 	return (
-		<div class="toy">toy</div>
+		<div id="toy" className="toy"></div>
 	)
 }

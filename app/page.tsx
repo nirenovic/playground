@@ -1,8 +1,6 @@
 import Image from "next/image";
-import ToyBox from "@/components/ToyBox";
+import PlayGround from "@/components/PlayGround";
 
 export default function Home() {
-  return (
-    <ToyBox />
-  );
+  return <PlayGround />;
 }
