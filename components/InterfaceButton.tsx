@@ -8,7 +8,8 @@ interface Props {
 }
 
 export default function InterfaceButton(props: Props) {
-	const buttonRef = useRef(null);
+	const buttonRef = useRef(document.createElement("div"));
+	
 	
 	const handleClick = () => {
 		buttonRef.current.style.animation = `click 0.3s ease 0s 1 normal forwards`;
