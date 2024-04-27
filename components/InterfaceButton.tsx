@@ -4,6 +4,7 @@ import {useRef} from 'react';
 
 interface Props {
 	onClick: () => void;
+	icon: string;
 }
 
 export default function InterfaceButton(props: Props) {
