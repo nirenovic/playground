@@ -65,7 +65,6 @@ export default function PlayGround() {
 			constraint: {
 				stiffness: 0.6,
 				length: 0,
-				angularStiffness: 0,
 				render: {
 					visible: false
 				}
