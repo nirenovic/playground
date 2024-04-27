@@ -54,7 +54,6 @@ export default function PlayGround() {
 			options: {
 				width: window.innerWidth,
 				height: window.innerHeight,
-				enabled: true,
 			  // showAngleIndicator: true,
 				wireframes: false,
 				background: 'transparent',
