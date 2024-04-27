@@ -4,6 +4,8 @@
 	height: 80px;
 	border-radius: 8px;
 	//background: #ededed;
-	background: rgba(255, 0, 0, 0.5);
-	border-bottom: 1px solid blue;
+	//background: rgba(255, 0, 0, 0.5);
+	//border-bottom: 1px solid blue;
+	cursor: grab;
+	pointer-events: none;
 }

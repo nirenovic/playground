@@ -1,0 +1,140 @@
+#logo
+{
+	display: inline-block;
+	position: relative;
+	color: #171717;
+	font-size: 32px;
+	font-weight: bold;
+	letter-spacing: -2.5px;
+	word-spacing: 4px;
+	user-select: none;
+
+	@keyframes dot-init
+	{
+		from
+		{
+			opacity: 0;
+		}
+		to 
+		{
+			opacity: 1;
+		}
+	}
+
+	@keyframes animate-dot
+	{
+		// start end of name
+		0%
+		{
+			top: calc(100% + -19.5px);
+			left: calc(100% + 8px);
+			width: 8px;
+			height: 8px;
+			filter: blur(0px);
+		}
+		// transition start to top right
+		3%
+		{
+			width: 6px;
+			height: 10px;
+			filter: blur(0.5px);
+		}
+		// top right corner
+		6%
+		{
+			width: 8px;
+			height: 8px;
+			top: 0%;
+			left: calc(100% + 8px);
+			filter: blur(0px);
+		}
+		// transition top right to top left
+		12%
+		{
+			width: 12px;
+			height: 4px;
+			filter: blur(1.5px);
+		}
+		// top left corner
+		18%
+		{
+			width: 8px;
+			height: 8px;
+			top: 0%;
+			left: calc(0% - 12px);
+			filter: blur(0px);
+		}
+		// transition top left to bottom left
+		21%
+		{
+			width: 6px;
+			height: 10px;
+			filter: blur(0.5px);
+		}
+		// bottom left
+		24%
+		{
+			width: 8px;
+			height: 8px;
+			top: calc(100% - 4px);
+			left: calc(0% - 12px);
+			filter: blur(0px);
+		}
+		// transition bottom left to bottom right
+		32%
+		{
+			width: 12px;
+			height: 4px;
+			filter: blur(1.5px);
+		}
+		// bottom right
+		40%
+		{
+			width: 8px;
+			height: 8px;
+			top: calc(100% - 4px);
+			left: calc(100% + 8px);
+			filter: blur(0px);
+		}
+		// transition bottom right to starting position
+		45%
+		{
+			width: 7px;
+			height: 9px;
+			filter: blur(0.2px);
+		}
+		// reset to start
+		50%
+		{
+			top: calc(100% + -19.5px);
+			left: calc(100% + 8px);
+			width: 8px;
+			height: 8px;
+			filter: blur(0px);
+		}
+		// delay
+		100%
+		{
+			top: calc(100% + -19.5px);
+			left: calc(100% + 8px);
+			width: 8px;
+			height: 8px;
+			filter: blur(0px);
+		}
+	}
+
+	&::after
+	{
+		content: "";
+		display: block;
+		width: 8px;
+		height: 8px;
+		position: absolute;
+		top: calc(100% + -19.5px);
+		left: calc(100% + 8px);
+		border-radius: 50%;
+		background: #171717;
+		opacity: 0;
+		animation: dot-init 1s ease-in 2s normal forwards, animate-dot 6s ease 3s normal infinite;
+	}
+}

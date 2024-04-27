@@ -1,0 +1,63 @@
+.interfaceButton
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	font-size: 32px; 
+	font-weight: bold;
+	cursor: pointer;
+	color: #ffffff;
+	user-select: none;
+	animation: appear 0.8s ease 3s normal forwards;
+	transform: scale(0);
+
+	@keyframes click 
+	{
+		0% 
+		{ transform: scale(1); }
+		70%
+		{ transform: scale(1.5); }
+		90%
+		{ transform: scale(0.7); }
+		100%
+		{ transform: scale(1); }
+	}
+
+	@keyframes reset
+	{
+		from {transform: scale(1)}
+		to {transform: scale(1)}
+	}
+
+	@keyframes appear
+	{
+		0% 
+		{ transform: scale(0); }
+		70%
+		{ transform: scale(1.5); }
+		100%
+		{ transform: scale(1); }
+	}
+
+	&::before
+	{
+		content: "";
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		border-radius: 50%;
+		background: #171717;
+		transition: all 0.2s cubic-bezier(0.45, -1.44, 0.52, 2.34);
+		z-index: -1;
+	}
+
+	&:hover
+	{
+		&::before
+		{
+			width: 50px;
+			height: 50px;
+		}
+	}
+}

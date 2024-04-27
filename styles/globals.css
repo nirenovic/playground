@@ -30,10 +30,13 @@ body {
 
 body
 {
-  width: 100vw;
-  height: 100vh;
   //overflow: hidden;
-  background: green;
+  //background: #353535;
+  color: #171717;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 @layer utilities {

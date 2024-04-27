@@ -1,0 +1,43 @@
+@keyframes interface-init
+{
+	0%
+	{
+		top: -20px;
+		opacity: 0;
+	}	
+	50%
+	{
+		opacity: 0;
+	}
+	100% 
+	{
+		top: 20px;
+		opacity: 1;
+	}
+}
+
+#interface
+{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	opacity: 0;
+	animation: interface-init 2s ease normal forwards;
+	pointer-events: none;
+
+	#logo
+	{
+		left: 40px;
+		pointer-events: all;
+	}
+
+	#interfaceButtonContainer
+	{
+		position: fixed;
+		right: 40px;
+		top: 50vh;
+		pointer-events: all;
+	}
+}
