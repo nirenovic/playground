@@ -4,11 +4,7 @@ import Logo from "@/components/Logo";
 import InterfaceButton from "@/components/InterfaceButton";
 import { spawnBox } from "@/components/PlayGround";
 
-export default function Interface(props) {
-	const handleClick = () => {
-		PlayGround.spawnBox();
-	}
-	
+export default function Interface() {
 	return (
 		<div id="interface">
 			<div id="interface-inner">
