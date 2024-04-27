@@ -2,7 +2,11 @@
 
 import {useRef} from 'react';
 
-export default function InterfaceButton(props) {
+interface Props {
+	onClick: () => void;
+}
+
+export default function InterfaceButton(props: Props) {
 	const buttonRef = useRef(null);
 	
 	const handleClick = () => {
