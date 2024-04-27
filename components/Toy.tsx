@@ -1,6 +1,6 @@
 "use client";
 
-export default function Toy(props) {
+export default function Toy() {
 	return (
 		<div className="toy">
 			<span></span>
