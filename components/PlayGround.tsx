@@ -1,7 +1,7 @@
 "use client";
 
 import ToyBox from "@/components/ToyBox";
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Matter from "matter-js";
 
 var Engine = Matter.Engine,
