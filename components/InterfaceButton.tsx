@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 
 interface Props {
 	onClick: () => void;
