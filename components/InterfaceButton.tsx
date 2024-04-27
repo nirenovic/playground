@@ -1,6 +1,6 @@
 'use client';
 
-import {useRef} from 'react';
+import React, { useRef } from 'react';
 
 interface Props {
 	onClick: () => void;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function InterfaceButton(props: Props) {
-	const buttonRef = useRef<HTMLInputElement>();;
+	const buttonRef = useRef<HTMLDivElement | null>(null)
 
 	
 	const handleClick = () => {
