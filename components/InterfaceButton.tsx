@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function InterfaceButton(props: Props) {
-	const buttonRef = useRef<HTMLDivElement | null>(null)
+	const buttonRef = useRef() as MutableRefObject<HTMLDivElement>;
 
 	
 	const handleClick = () => {
