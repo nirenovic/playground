@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function InterfaceButton(props: Props) {
-	const buttonRef = useRef(0);
+	const buttonRef = useRef<HTMLInputElement>();;
 
 	
 	const handleClick = () => {
