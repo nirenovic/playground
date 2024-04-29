@@ -1,33 +1,23 @@
 .interfaceButton
 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	font-size: 32px; 
-	font-weight: bold;
-	cursor: pointer;
-	color: #ffffff;
-	user-select: none;
-	animation: appear 0.8s ease 3s normal forwards;
-	transform: scale(0);
-
 	@keyframes click 
 	{
 		0% 
 		{ transform: scale(1); }
-		70%
-		{ transform: scale(1.5); }
-		90%
-		{ transform: scale(0.7); }
+		30%
+		{ transform: scale(1.2); }
+		50%
+		{ transform: scale(0.8); }
 		100%
 		{ transform: scale(1); }
 	}
 
 	@keyframes reset
 	{
-		from {transform: scale(1)}
-		to {transform: scale(1)}
+		from 
+		{ transform: scale(1); }
+		to
+		{ transform: scale(1); }
 	}
 
 	@keyframes appear
@@ -40,24 +30,106 @@
 		{ transform: scale(1); }
 	}
 
+	@keyframes idle 
+	{
+		0%
+		{
+			bottom: 0px;
+		}
+		7.5%
+		{
+			bottom: 0px;
+		}
+		10%
+		{
+			bottom: 10px;
+		}
+		12.5%
+		{
+			bottom: 0px;
+		}
+		13%
+		{
+			bottom: 0px;
+		}
+		15%
+		{
+			bottom: 10px;
+		}
+		17.5%
+		{
+			bottom: 0px;
+		}
+		100%
+		{
+			bottom: 0px;
+		}
+	}
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	min-height: 60px;
+	position: relative;
+	bottom: 0px;
+	margin-bottom: 32px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #ffffff;
+	user-select: none;
+	animation: appear 0.8s ease 0s normal forwards;
+	transform: scale(0);
+
+	&:first-child
+	{
+		animation: appear 0.8s ease 3s normal forwards, idle 5s cubic-bezier(0, -0.58, 0.48, 1) 5s normal infinite;
+
+		&:hover
+		{
+			animation: appear 0.8s ease 0s normal forwards;
+		}
+	}
+
 	&::before
 	{
 		content: "";
-		width: 40px;
-		height: 40px;
+		width: 100%;
+		height: 100%;
 		position: absolute;
 		border-radius: 50%;
-		background: #171717;
+		background: #ffffff;
 		transition: all 0.2s cubic-bezier(0.45, -1.44, 0.52, 2.34);
+		box-shadow: 0px 0px 10px -5px black;
 		z-index: -1;
+	}
+
+	span 
+	{
+		font-size: 32px;
+
+		@keyframes icon-pulse
+		{
+			from
+			{ transform: scale(1); }
+			to
+			{ transform: scale(1.5); }
+		}
+
+		transform: scale(1);
 	}
 
 	&:hover
 	{
 		&::before
 		{
-			width: 50px;
-			height: 50px;
+			width: 70px;
+			height: 70px;
+		}
+
+		span 
+		{
+			animation: icon-pulse 0.5s ease-in-out 0s alternate infinite;
 		}
 	}
 }

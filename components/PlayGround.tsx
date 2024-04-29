@@ -34,13 +34,40 @@ var ground,
 var mouse,
 	mouseConstraint;
 
+function rand(min, max) {
+	var n = Math.floor(Math.random() * (max - min));
+	n += min;
+
+	return n;
+}
+
+function pickRandColor() {
+	var bodyColors = ['#54478c', '#2c699a', '#048ba8', '#0db39e', '#16db93', '#83e377', '#b9e769', '#efea5a', '#f1c453', '#f29e4c'];
+	return bodyColors[rand(0, bodyColors.length)];
+}
+
 // Function to spawn a new box
 export const spawnBox = () => {
-	const x = 40;
-	const y = 40;
-	const newBox = Matter.Bodies.rectangle(x, y, 50, 50);
+	const x = rand(0, window.innerWidth);
+	const y = rand(0, window.innerHeight);
+	const w = rand(10, 100);
+	const h = rand(10, 100);
+	const c = pickRandColor();
+	// const c = pickRandColor();
+	// console.log(c);
+	const newBox = Matter.Bodies.rectangle(x, y, w, h, {
+		render: {
+			fillStyle: c,
+			strokeStyle: '#ffffff',
+			lineWidth: 1
+		}
+	});
 	Composite.add(world, newBox);
-	console.log('spawn box called');
+};
+
+export const clearBoxes = () => {
+	Composite.clear(world, true);
+	Composite.add(world, mouseConstraint);
 };
 
 export default function PlayGround() {
@@ -64,6 +91,7 @@ export default function PlayGround() {
 			mouse: mouse,
 			constraint: {
 				stiffness: 0.6,
+				angularStiffness: 0,
 				length: 0,
 				render: {
 					visible: false
