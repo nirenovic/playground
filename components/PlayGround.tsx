@@ -90,8 +90,8 @@ export default function PlayGround() {
 		mouseConstraint = MouseConstraint.create(engine, {
 			mouse: mouse,
 			constraint: {
-				stiffness: 0.6,
-				angularStiffness: 0,
+				//stiffness: 0.6,
+				angularStiffness: 0.5,
 				length: 0,
 				render: {
 					visible: false
