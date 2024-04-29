@@ -34,7 +34,7 @@ var ground,
 var mouse,
 	mouseConstraint: Matter.MouseConstraint;
 
-function rand(min, max) {
+function rand(min: int, max: int) {
 	var n = Math.floor(Math.random() * (max - min));
 	n += min;
 
