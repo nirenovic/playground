@@ -32,7 +32,7 @@ var ground,
 
 // add mouse control and make the mouse revolute
 var mouse,
-	mouseConstraint;
+	mouseConstraint: Matter.MouseConstraint;
 
 function rand(min, max) {
 	var n = Math.floor(Math.random() * (max - min));
