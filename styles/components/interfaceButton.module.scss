@@ -66,14 +66,15 @@
 		}
 	}
 
+	$size: 8vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 60px;
-	min-height: 60px;
+	width: $size;
+	height: $size;
 	position: relative;
 	bottom: 0px;
-	margin-bottom: 32px;
+	margin-bottom: $size / 2;
 	font-weight: bold;
 	cursor: pointer;
 	color: #ffffff;
@@ -106,7 +107,7 @@
 
 	span 
 	{
-		font-size: 32px;
+		font-size: 5vh;
 
 		@keyframes icon-pulse
 		{
@@ -123,8 +124,8 @@
 	{
 		&::before
 		{
-			width: 70px;
-			height: 70px;
+			width: 10vh;
+			height: 10vh;
 		}
 
 		span 

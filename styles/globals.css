@@ -33,6 +33,8 @@ body
   //overflow: hidden;
   //background: #353535;
   color: #171717;
+  transition: all 0.1s ease-in-out;
+  background: #ffffff;
 }
 
 body::-webkit-scrollbar {

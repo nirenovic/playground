@@ -3,15 +3,17 @@
 import Logo from "@/components/Logo";
 import InterfaceButton from "@/components/InterfaceButton";
 import { spawnBox, clearBoxes, boomBoxes, toggleGrav } from "@/components/PlayGround";
-import React, { useState, useRef, MutableRefObject } from 'react';
+import React, { useState, useRef, useReducer, MutableRefObject } from 'react';
 
 var spawns: number = 0;
+var lowGrav: boolean = false;
 
 export default function Interface() {
 	const btnWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 	const [showClearBtn, setShowClearBtn] = useState(false);
 	const [showBoomBtn, setShowBoomBtn] = useState(false);
 	const [showGravBtn, setShowGravBtn] = useState(false);
+	const [, forceUpdate] = useReducer(x => x + 1, 0);
 
 	const addClearButton = () => {
 		setShowClearBtn(true);
@@ -39,10 +41,15 @@ export default function Interface() {
 
 	const handleBoom = () => {
 		boomBoxes();
+		setShowGravBtn(true);
 	}
 
 	const handleGrav = () => {
 		toggleGrav();
+		console.log(lowGrav);
+		lowGrav = !lowGrav;
+		forceUpdate();
+
 	}
 
 	return (
@@ -54,7 +61,7 @@ export default function Interface() {
 					<InterfaceButton icon="📦" onClick={handleSpawn} />
 					{showClearBtn && <InterfaceButton icon="💀" onClick={handleClear} />}
 					{showBoomBtn && <InterfaceButton icon="💥" onClick={handleBoom} />}
-					{showGravBtn && <InterfaceButton icon="🌝" onClick={handleGrav} />}
+					{showGravBtn && <InterfaceButton icon={lowGrav == false ? "🌝" : "🌏"} onClick={handleGrav} />}
 				</div>
 			</div>
 		</div>

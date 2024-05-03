@@ -1,7 +1,7 @@
 "use client";
 
 import ToyBox from "@/components/ToyBox";
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Matter from "matter-js";
 
 var Engine = Matter.Engine,
@@ -21,6 +21,9 @@ var engine = Engine.create(),
 	world = engine.world,
 	render,
 	runner = Runner.create();
+
+// track lowgrav state
+var lowGrav = false;
 
 Runner.run(runner, engine);
 
@@ -59,7 +62,7 @@ export const spawnBox = () => {
 		label: "box",
 		render: {
 			fillStyle: c,
-			strokeStyle: '#ffffff',
+			strokeStyle: 'transparent',
 			lineWidth: 1
 		}
 	});
@@ -90,13 +93,69 @@ export const boomBoxes = () => {
 }
 
 export const toggleGrav = () => {
-	console.log("toggled grav");
+	if (lowGrav) {
+		if (document != undefined) {
+			document.body.style.background = `#ffffff`;
+			document.getElementById('logo').style.filter = `invert(0)`;
+		}
+		engine.gravity.y = 1;
+		lowGrav = !lowGrav;
+	} else {
+		if (document != undefined) {
+			document.body.style.background = `#171717`;
+			document.getElementById('logo').style.filter = `invert(1)`;
+		}
+		engine.gravity.y = 0;
+		lowGrav = !lowGrav;
+	}
 }
 
-export default function PlayGround() {
-  	// init Matter-js vars
+const useWidth = () => {
+    const [width, setWidth] = useState(0); // default width, detect on server.
+    const handleResize = () => setWidth(window.innerWidth);
+    useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, [handleResize]);
+    return width;
+};
 
+export default function PlayGround() {
 	useEffect(() => {
+		// window resize events
+		function handleResize() {
+			// update renderer
+			render.bounds.max.x = window.innerWidth;
+		    render.bounds.max.y = window.innerHeight;
+		    render.options.width = window.innerWidth;
+		    render.options.height = window.innerHeight;
+		    render.canvas.width = window.innerWidth;
+		    render.canvas.height = window.innerHeight;
+			// update ground
+			Matter.Body.setPosition(ground, {x: window.innerWidth / 2, y: window.innerHeight + 250});
+			// update left wall
+			Matter.Body.setPosition(leftWall, {x: -250, y: window.innerHeight / 2});
+			// update right wall
+			Matter.Body.setPosition(rightWall, {x: window.innerWidth + 250, y: window.innerHeight / 2});
+			// update ceiling
+			Matter.Body.setPosition(ceiling, {x: window.innerWidth / 2, y: -250});
+
+			mouse = Mouse.create(render.canvas);
+			mouseConstraint = MouseConstraint.create(engine, {
+				mouse: mouse,
+				constraint: {
+					stiffness: 0.6,
+					//angularStiffness: 0.5,
+					length: 0,
+					render: {
+						visible: false
+					}
+				}
+			});
+  		}
+
+  		window.addEventListener('resize', handleResize)
+
 		// create renderer
 		render = Render.create({
 			element: document.body,
@@ -127,7 +186,7 @@ export default function PlayGround() {
 		ground = Matter.Bodies.rectangle(
 			window.innerWidth / 2,
 			window.innerHeight + 250,
-			window.innerWidth,
+			99999,
 			500,
 			{
 				isStatic: true
@@ -138,7 +197,7 @@ export default function PlayGround() {
 			-250,
 			window.innerHeight / 2,
 			500,
-			window.innerHeight,
+			99999,
 			{
 				isStatic: true
 			}
@@ -148,7 +207,7 @@ export default function PlayGround() {
 			window.innerWidth + 250, 
 			window.innerHeight / 2,
 			500,
-			window.innerHeight,
+			99999,
 			{
 				isStatic: true
 			}
@@ -157,7 +216,7 @@ export default function PlayGround() {
 		ceiling = Matter.Bodies.rectangle(
 			window.innerWidth / 2, 
 			-250, 
-			window.innerWidth,
+			99999,
 			500,
 			{
 				isStatic: true
