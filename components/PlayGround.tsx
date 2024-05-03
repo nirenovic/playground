@@ -94,7 +94,7 @@ export const boomBoxes = () => {
 
 export const toggleGrav = () => {
 	if (lowGrav) {
-		if (document != undefined) {
+		if (document != undefined && document != null) {
 			document.body.style.background = `#ffffff`;
 			document.getElementById('logo').style.filter = `invert(0)`;
 		}
