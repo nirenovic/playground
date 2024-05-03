@@ -131,8 +131,8 @@ export default function PlayGround() {
 		// window resize events
 		function handleResize() {
 			// update renderer
-			render.bounds.max.x = window.innerWidth;
-		    render.bounds.max.y = window.innerHeight;
+			// render.bounds.max.x = window.innerWidth;
+		    // render.bounds.max.y = window.innerHeight;
 		    render.options.width = window.innerWidth;
 		    render.options.height = window.innerHeight;
 		    render.canvas.width = window.innerWidth;
