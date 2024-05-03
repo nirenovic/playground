@@ -129,7 +129,7 @@ const useWidth = () => {
 export default function PlayGround() {
 	useEffect(() => {
 		// create renderer
-		render = Render.create({
+		render = Matter.Render.create({
 			element: document.body,
 			engine: engine,
 			options: {
@@ -233,7 +233,7 @@ export default function PlayGround() {
 			});
   		}
 
-  		window.addEventListener('resize', handleResize)
+  		window.addEventListener('resize', handleResize);
 	}, []);
 
 	return (
