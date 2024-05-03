@@ -204,12 +204,12 @@ export default function PlayGround() {
 		// window resize events
 		function handleResize() {
 			// update renderer
-			render.bounds.max.x = window.innerWidth;
-		    render.bounds.max.y = window.innerHeight;
-		    render.options.width = window.innerWidth;
-		    render.options.height = window.innerHeight;
-		    render.canvas.width = window.innerWidth;
-		    render.canvas.height = window.innerHeight;
+			// render.bounds.max.x = window.innerWidth;
+		    // render.bounds.max.y = window.innerHeight;
+		    // render.options.width = window.innerWidth;
+		    // render.options.height = window.innerHeight;
+		    // render.canvas.width = window.innerWidth;
+		    // render.canvas.height = window.innerHeight;
 			// update ground
 			Matter.Body.setPosition(ground, {x: window.innerWidth / 2, y: window.innerHeight + 250});
 			// update left wall
