@@ -94,12 +94,13 @@ export const boomBoxes = () => {
 
 export const toggleGrav = () => {
 	const doc = document;
+	const logo = (document.getElementById('logo') as HTMLInputElement).value;
 	if (lowGrav) {
 		if (doc === null) {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#ffffff`;
-			document.body.getElementById('logo').style.filter = `invert(0)`;
+ 			logo.style.filter = `invert(0)`;
 		}
 		engine.gravity.y = 1;
 		lowGrav = !lowGrav;
@@ -108,7 +109,7 @@ export const toggleGrav = () => {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#171717`;
-			document.body.getElementById('logo').style.filter = `invert(1)`;
+			logo.style.filter = `invert(1)`;
 		}
 		engine.gravity.y = 0;
 		lowGrav = !lowGrav;
