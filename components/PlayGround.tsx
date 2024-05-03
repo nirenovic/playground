@@ -28,13 +28,13 @@ var lowGrav = false;
 Runner.run(runner, engine);
 
 // Create boundaries
-var ground = Matter.Body,
-	leftWall = Matter.Body,
-	rightWall = Matter.Body,
-	ceiling = Matter.Body;
+var ground: Matter.Body,
+	leftWall: Matter.Body,
+	rightWall: Matter.Body,
+	ceiling: Matter.Body;
 
 // add mouse control and make the mouse revolute
-var mouse,
+var mouse: Matter.Mouse,
 	mouseConstraint: Matter.MouseConstraint;
 
 function rand(min: number, max: number) {
