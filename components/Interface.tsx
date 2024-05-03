@@ -2,7 +2,7 @@
 
 import Logo from "@/components/Logo";
 import InterfaceButton from "@/components/InterfaceButton";
-import { spawnBox, clearBoxes, boomBoxes } from "@/components/PlayGround";
+import { spawnBox, clearBoxes, boomBoxes, toggleGrav } from "@/components/PlayGround";
 import React, { useState, useRef, MutableRefObject } from 'react';
 
 var spawns: number = 0;
@@ -11,6 +11,7 @@ export default function Interface() {
 	const btnWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 	const [showClearBtn, setShowClearBtn] = useState(false);
 	const [showBoomBtn, setShowBoomBtn] = useState(false);
+	const [showGravBtn, setShowGravBtn] = useState(false);
 
 	const addClearButton = () => {
 		setShowClearBtn(true);
@@ -40,6 +41,10 @@ export default function Interface() {
 		boomBoxes();
 	}
 
+	const handleGrav = () => {
+		toggleGrav();
+	}
+
 	return (
 		<div id="interface">
 			<div id="interface-inner">
@@ -49,6 +54,7 @@ export default function Interface() {
 					<InterfaceButton icon="📦" onClick={handleSpawn} />
 					{showClearBtn && <InterfaceButton icon="💀" onClick={handleClear} />}
 					{showBoomBtn && <InterfaceButton icon="💥" onClick={handleBoom} />}
+					{showGravBtn && <InterfaceButton icon="🌝" onClick={handleGrav} />}
 				</div>
 			</div>
 		</div>

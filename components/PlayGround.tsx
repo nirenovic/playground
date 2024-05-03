@@ -89,6 +89,10 @@ export const boomBoxes = () => {
 	}
 }
 
+export const toggleGrav = () => {
+	console.log("toggled grav");
+}
+
 export default function PlayGround() {
   	// init Matter-js vars
 
