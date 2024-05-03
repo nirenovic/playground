@@ -56,6 +56,7 @@ export const spawnBox = () => {
 	// const c = pickRandColor();
 	// console.log(c);
 	const newBox = Matter.Bodies.rectangle(x, y, w, h, {
+		label: "box",
 		render: {
 			fillStyle: c,
 			strokeStyle: '#ffffff',
@@ -69,6 +70,24 @@ export const clearBoxes = () => {
 	Composite.clear(world, true);
 	Composite.add(world, mouseConstraint);
 };
+
+export const boomBoxes = () => {
+	var force = Matter.Vector.create(0.1, 0.1);
+	var origin = Matter.Vector.create(window.innerWidth/2, window.innerHeight);
+	var pos = Matter.Vector.create(rand(0, window.innerWidth), rand(0, window.innerHeight)); 
+
+	for (var body of Composite.allBodies(world).filter(body => body.label === "box"))
+	{
+		force = Matter.Vector.create(0.1, 0.1);
+		var x1 = pos.x;
+		var x2 = body.position.x;
+		var y1 = pos.y;
+		var y2 = body.position.y;
+		var dist = Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+		force = Matter.Vector.mult(force, dist * 0.0005);
+		Body.applyForce(body, pos, force);
+	}
+}
 
 export default function PlayGround() {
   	// init Matter-js vars
