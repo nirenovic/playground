@@ -94,7 +94,7 @@ export const boomBoxes = () => {
 
 export const toggleGrav = () => {
 	const doc = document;
-	const logo = (document.getElementById('logo') as HTMLInputElement).value;
+	const logo = (document.getElementById('logo') as HTMLInputElement)
 	if (lowGrav) {
 		if (doc === null) {
 			console.log("document is null");
