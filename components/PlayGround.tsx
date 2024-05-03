@@ -28,10 +28,10 @@ var lowGrav = false;
 Runner.run(runner, engine);
 
 // Create boundaries
-var ground,
-	leftWall,
-	rightWall,
-	ceiling;
+var ground = Matter.Body,
+	leftWall = Matter.Body,
+	rightWall = Matter.Body,
+	ceiling = Matter.Body;
 
 // add mouse control and make the mouse revolute
 var mouse,
