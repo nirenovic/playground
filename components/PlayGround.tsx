@@ -128,40 +128,6 @@ const useWidth = () => {
 
 export default function PlayGround() {
 	useEffect(() => {
-		// window resize events
-		function handleResize() {
-			// update renderer
-			// render.bounds.max.x = window.innerWidth;
-		    // render.bounds.max.y = window.innerHeight;
-		    render.options.width = window.innerWidth;
-		    render.options.height = window.innerHeight;
-		    render.canvas.width = window.innerWidth;
-		    render.canvas.height = window.innerHeight;
-			// update ground
-			Matter.Body.setPosition(ground, {x: window.innerWidth / 2, y: window.innerHeight + 250});
-			// update left wall
-			Matter.Body.setPosition(leftWall, {x: -250, y: window.innerHeight / 2});
-			// update right wall
-			Matter.Body.setPosition(rightWall, {x: window.innerWidth + 250, y: window.innerHeight / 2});
-			// update ceiling
-			Matter.Body.setPosition(ceiling, {x: window.innerWidth / 2, y: -250});
-
-			mouse = Mouse.create(render.canvas);
-			mouseConstraint = MouseConstraint.create(engine, {
-				mouse: mouse,
-				constraint: {
-					stiffness: 0.6,
-					//angularStiffness: 0.5,
-					length: 0,
-					render: {
-						visible: false
-					}
-				}
-			});
-  		}
-
-  		window.addEventListener('resize', handleResize)
-
 		// create renderer
 		render = Render.create({
 			element: document.body,
@@ -234,6 +200,40 @@ export default function PlayGround() {
 		Render.run(render);
 
 		Composite.add(world, [ground, leftWall, rightWall, ceiling, mouseConstraint]);
+
+		// window resize events
+		function handleResize() {
+			// update renderer
+			render.bounds.max.x = window.innerWidth;
+		    render.bounds.max.y = window.innerHeight;
+		    render.options.width = window.innerWidth;
+		    render.options.height = window.innerHeight;
+		    render.canvas.width = window.innerWidth;
+		    render.canvas.height = window.innerHeight;
+			// update ground
+			Matter.Body.setPosition(ground, {x: window.innerWidth / 2, y: window.innerHeight + 250});
+			// update left wall
+			Matter.Body.setPosition(leftWall, {x: -250, y: window.innerHeight / 2});
+			// update right wall
+			Matter.Body.setPosition(rightWall, {x: window.innerWidth + 250, y: window.innerHeight / 2});
+			// update ceiling
+			Matter.Body.setPosition(ceiling, {x: window.innerWidth / 2, y: -250});
+
+			mouse = Mouse.create(render.canvas);
+			mouseConstraint = MouseConstraint.create(engine, {
+				mouse: mouse,
+				constraint: {
+					stiffness: 0.6,
+					//angularStiffness: 0.5,
+					length: 0,
+					render: {
+						visible: false
+					}
+				}
+			});
+  		}
+
+  		window.addEventListener('resize', handleResize)
 	}, []);
 
 	return (
