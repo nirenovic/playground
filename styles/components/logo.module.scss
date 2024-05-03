@@ -8,6 +8,7 @@
 	letter-spacing: -2.5px;
 	word-spacing: 4px;
 	user-select: none;
+	-webkit-user-select : none;
 
 	@keyframes dot-init
 	{
@@ -126,6 +127,7 @@
 	span 
 	{
 		user-select: none;
+		-webkit-user-select : none;
 	}
 
 	&::after
@@ -142,5 +144,6 @@
 		opacity: 0;
 		animation: dot-init 1s ease-in 2s normal forwards, animate-dot 6s ease 3s normal infinite;
 		user-select: none;
+		-webkit-user-select : none;
 	}
 }

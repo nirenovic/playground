@@ -79,6 +79,7 @@
 	cursor: pointer;
 	color: #ffffff;
 	user-select: none;
+	-webkit-user-select : none;
 	animation: appear 0.8s ease 0s normal forwards;
 	transform: scale(0);
 
@@ -104,12 +105,14 @@
 		box-shadow: 0px 0px 10px -5px black;
 		z-index: -1;
 		user-select: none;
+		-webkit-user-select : none;
 	}
 
 	span 
 	{
 		font-size: 5vh;
 		user-select: none;
+		-webkit-user-select : none;
 
 		@keyframes icon-pulse
 		{
@@ -124,10 +127,12 @@
 
 	&:hover
 	{
+		-webkit-user-select : none;
 		&::before
 		{
 			width: 10vh;
 			height: 10vh;
+			-webkit-user-select : none;
 		}
 
 		span 

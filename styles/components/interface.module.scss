@@ -27,6 +27,7 @@
 	animation: interface-init 2s ease normal forwards;
 	pointer-events: none;
 	user-select: none;
+	-webkit-user-select : none;
 
 	#logo
 	{
@@ -47,5 +48,6 @@
 		pointer-events: all;
 		// overflow-y: scroll;
 		user-select: none;
+		-webkit-user-select : none;
 	}
 }
