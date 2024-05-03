@@ -19,7 +19,7 @@ var Engine = Matter.Engine,
 	// create engine
 var engine = Engine.create(),
 	world = engine.world,
-	render,
+	render = Render,
 	runner = Runner.create();
 
 // track lowgrav state
