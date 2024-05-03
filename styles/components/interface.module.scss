@@ -26,6 +26,7 @@
 	opacity: 0;
 	animation: interface-init 2s ease normal forwards;
 	pointer-events: none;
+	user-select: none;
 
 	#logo
 	{
@@ -45,5 +46,6 @@
 		padding: 10px;
 		pointer-events: all;
 		// overflow-y: scroll;
+		user-select: none;
 	}
 }

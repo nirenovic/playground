@@ -103,11 +103,13 @@
 		transition: all 0.2s cubic-bezier(0.45, -1.44, 0.52, 2.34);
 		box-shadow: 0px 0px 10px -5px black;
 		z-index: -1;
+		user-select: none;
 	}
 
 	span 
 	{
 		font-size: 5vh;
+		user-select: none;
 
 		@keyframes icon-pulse
 		{
