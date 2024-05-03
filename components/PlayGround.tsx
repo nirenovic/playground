@@ -99,7 +99,7 @@ export const toggleGrav = () => {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#ffffff`;
-			document.getElementById('logo').style.filter = `invert(0)`;
+			document.body.getElementById('logo').style.filter = `invert(0)`;
 		}
 		engine.gravity.y = 1;
 		lowGrav = !lowGrav;
@@ -108,7 +108,7 @@ export const toggleGrav = () => {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#171717`;
-			document.getElementById('logo').style.filter = `invert(1)`;
+			document.body.getElementById('logo').style.filter = `invert(1)`;
 		}
 		engine.gravity.y = 0;
 		lowGrav = !lowGrav;
