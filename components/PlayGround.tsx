@@ -93,8 +93,9 @@ export const boomBoxes = () => {
 }
 
 export const toggleGrav = () => {
+	const doc = document;
 	if (lowGrav) {
-		if (document === null) {
+		if (doc === null) {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#ffffff`;
@@ -103,7 +104,7 @@ export const toggleGrav = () => {
 		engine.gravity.y = 1;
 		lowGrav = !lowGrav;
 	} else {
-		if (document === null) {
+		if (doc === null) {
 			console.log("document is null");
 		} else {
 			document.body.style.background = `#171717`;
