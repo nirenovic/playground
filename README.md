@@ -5,7 +5,7 @@ You can create randomly generated boxes, clear them, cause explosions, and turn 
 
 Have a play around with it via this [GitHub Pages link](https://nirenovic.github.io/playground/).
 
-Here's a preview:
+Here's a preview: <br>
 ![GIF preview of app](pg60fps.gif)
 
 Have fun!
