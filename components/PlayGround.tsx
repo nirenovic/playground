@@ -1,9 +1,9 @@
 "use client";
 
-import ToyBox from "@/components/ToyBox";
 import { useEffect, useRef, useState } from 'react';
 import Matter from "matter-js";
 
+// matter js variables
 var Engine = Matter.Engine,
 	Events = Matter.Events,
 	Render = Matter.Render,
@@ -19,24 +19,23 @@ var Engine = Matter.Engine,
 	// create engine
 var engine = Engine.create(),
 	world = engine.world,
-	render: Matter.Render,
+	render: Render.create,
 	runner = Runner.create();
 
 // track lowgrav state
 var lowGrav = false;
 
-Runner.run(runner, engine);
-
-// Create boundaries
+// physical boundaries
 var ground: Matter.Body,
 	leftWall: Matter.Body,
 	rightWall: Matter.Body,
 	ceiling: Matter.Body;
 
-// add mouse control and make the mouse revolute
+// mouse variables
 var mouse: Matter.Mouse,
 	mouseConstraint: Matter.MouseConstraint;
 
+// general randrange function
 function rand(min: number, max: number) {
 	var n = Math.floor(Math.random() * (max - min));
 	n += min;
@@ -44,20 +43,19 @@ function rand(min: number, max: number) {
 	return n;
 }
 
+// pick random color from palette 
 function pickRandColor() {
 	var bodyColors = ['#54478c', '#2c699a', '#048ba8', '#0db39e', '#16db93', '#83e377', '#b9e769', '#efea5a', '#f1c453', '#f29e4c'];
 	return bodyColors[rand(0, bodyColors.length)];
 }
 
-// Function to spawn a new box
+// spawning new boxes
 export const spawnBox = () => {
 	const x = rand(0, window.innerWidth);
 	const y = rand(0, window.innerHeight);
 	const w = rand(10, 100);
 	const h = rand(10, 100);
 	const c = pickRandColor();
-	// const c = pickRandColor();
-	// console.log(c);
 	const newBox = Matter.Bodies.rectangle(x, y, w, h, {
 		label: "box",
 		render: {
@@ -66,14 +64,18 @@ export const spawnBox = () => {
 			lineWidth: 1
 		}
 	});
+	Body.setMass(newBox, w * h);
 	Composite.add(world, newBox);
 };
 
+// clear all boxes
 export const clearBoxes = () => {
 	Composite.clear(world, true);
 	Composite.add(world, mouseConstraint);
 };
 
+
+// create explosion effect
 export const boomBoxes = () => {
 	var force = Matter.Vector.create(0.1, 0.1);
 	var origin = Matter.Vector.create(window.innerWidth/2, window.innerHeight);
@@ -87,11 +89,12 @@ export const boomBoxes = () => {
 		var y1 = pos.y;
 		var y2 = body.position.y;
 		var dist = Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
-		force = Matter.Vector.mult(force, dist * 0.0005);
+		force = Matter.Vector.mult(force, dist * 0.5);
 		Body.applyForce(body, pos, force);
 	}
 }
 
+// toggle low gravity state with minor conditional styling
 export const toggleGrav = () => {
 	const doc = document;
 	const logo = (document.getElementById('logo') as HTMLInputElement)
@@ -116,42 +119,38 @@ export const toggleGrav = () => {
 	}
 }
 
-const useWidth = () => {
-    const [width, setWidth] = useState(0); // default width, detect on server.
-    const handleResize = () => setWidth(window.innerWidth);
-    useEffect(() => {
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, [handleResize]);
-    return width;
-};
+// run engine
+Runner.run(runner, engine);
 
 export default function PlayGround() {
+
 	useEffect(() => {
-		// create renderer
+		// create renderer, full window size
 		render = Matter.Render.create({
 			element: document.body,
 			engine: engine,
 			options: {
 				width: window.innerWidth,
 				height: window.innerHeight,
-			  // showAngleIndicator: true,
 				wireframes: false,
 				background: 'transparent',
 			}
 		});
+		// create matter.js mouse and constraint
 		mouse = Mouse.create(render.canvas);
 		mouseConstraint = MouseConstraint.create(engine, {
 			mouse: mouse,
 			constraint: {
 				stiffness: 0.6,
-				//angularStiffness: 0.5,
 				length: 0,
 				render: {
 					visible: false
 				}
 			}
 		});
+
+		// run renderer
+		Render.run(render);
 
 		// Create boundaries
 	  	// ground
@@ -194,51 +193,36 @@ export default function PlayGround() {
 				isStatic: true
 			}
 		);
-		
-		render.mouse = mouse;
-		// run renderer
-		Render.run(render);
 
+		// add bodies and mouseConstraint to world
 		Composite.add(world, [ground, leftWall, rightWall, ceiling, mouseConstraint]);
 
 		// window resize events
 		function handleResize() {
 			// update renderer
-			// render.bounds.max.x = window.innerWidth;
-		    // render.bounds.max.y = window.innerHeight;
-		    // render.options.width = window.innerWidth;
-		    // render.options.height = window.innerHeight;
-		    // render.canvas.width = window.innerWidth;
-		    // render.canvas.height = window.innerHeight;
-			// update ground
+			render.bounds.max.x = window.innerWidth;
+		    render.bounds.max.y = window.innerHeight;
+		    render.options.width = window.innerWidth;
+		    render.options.height = window.innerHeight;
+		    render.canvas.width = window.innerWidth;
+		    render.canvas.height = window.innerHeight;
+			// update boundaries
+			// ground
 			Matter.Body.setPosition(ground, {x: window.innerWidth / 2, y: window.innerHeight + 250});
-			// update left wall
+			// left wall
 			Matter.Body.setPosition(leftWall, {x: -250, y: window.innerHeight / 2});
-			// update right wall
+			// right wall
 			Matter.Body.setPosition(rightWall, {x: window.innerWidth + 250, y: window.innerHeight / 2});
-			// update ceiling
+			// ceiling
 			Matter.Body.setPosition(ceiling, {x: window.innerWidth / 2, y: -250});
-
-			mouse = Mouse.create(render.canvas);
-			mouseConstraint = MouseConstraint.create(engine, {
-				mouse: mouse,
-				constraint: {
-					stiffness: 0.6,
-					//angularStiffness: 0.5,
-					length: 0,
-					render: {
-						visible: false
-					}
-				}
-			});
   		}
 
+  		// assign handleResize to resize event listener
   		window.addEventListener('resize', handleResize);
 	}, []);
 
 	return (
 		<div id="playGround">
-		<ToyBox></ToyBox>
 		</div>
 	);
 }
