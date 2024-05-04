@@ -19,7 +19,6 @@ var Engine = Matter.Engine,
 	// create engine
 var engine = Engine.create(),
 	world = engine.world,
-	render = Matter.Render,
 	runner = Runner.create();
 
 // track lowgrav state
@@ -123,10 +122,8 @@ export const toggleGrav = () => {
 Runner.run(runner, engine);
 
 export default function PlayGround() {
-
 	useEffect(() => {
-		// create renderer, full window size
-		render = Matter.Render.create({
+		var render = Render.create({
 			element: document.body,
 			engine: engine,
 			options: {
@@ -135,7 +132,11 @@ export default function PlayGround() {
 				wireframes: false,
 				background: 'transparent',
 			}
-		});
+		});		
+		
+		// run renderer
+		Render.run(render);
+
 		// create matter.js mouse and constraint
 		mouse = Mouse.create(render.canvas);
 		mouseConstraint = MouseConstraint.create(engine, {
@@ -148,9 +149,6 @@ export default function PlayGround() {
 				}
 			}
 		});
-
-		// run renderer
-		Render.run(render);
 
 		// Create boundaries
 	  	// ground
